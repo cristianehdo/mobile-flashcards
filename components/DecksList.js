@@ -5,8 +5,8 @@ import { FlatList, StyleSheet, StatusBar, SafeAreaView } from 'react-native'
 import DecksListItem from './DecksListItem'
 
 class DecksList extends Component {
-  renderItem = ({ deck }) => (
-    <DecksListItem deck={deck}/>
+  renderItem = ({ item }) => (
+    <DecksListItem deck={item}/>
   )
   render () {
     const { decks } = this.props
