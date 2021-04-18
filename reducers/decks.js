@@ -16,6 +16,7 @@ const decks = (state = {}, action) => {
       ...state,
       [action.deck.id]: {
         ...action.deck,
+        cards: []
       },
     }
   case REMOVE_DECK: {
