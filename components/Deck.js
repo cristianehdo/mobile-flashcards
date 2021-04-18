@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 import { removeDeck} from '../actions'
 import { StyleSheet, Text, View, Button, TextButton } from 'react-native'
 
-const Deck = ({ deck }) => {
+const Deck = ({ route }) => {
   const dispatch = useDispatch()
+  const { deck } = route.params
   const { title, cards, id } = deck
   return(
     <View style={styles.container} key={id}>
@@ -38,6 +39,6 @@ const styles = StyleSheet.create({
 })
 
 Deck.propTypes = {
-  deck: PropTypes.object,
+  route: PropTypes.object,
 }
 export default Deck
