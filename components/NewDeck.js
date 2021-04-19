@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 import { addDeck } from '../actions'
 import { generateId } from '../utils/helpers'
+import { black, purple } from '../utils/colors'
 
 
 const NewDeck = () => {
@@ -63,12 +64,12 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    borderColor: '#000000',
+    borderColor: black,
     borderBottomWidth: 1,
     marginBottom: 36
   },
   btnContainer: {
-    backgroundColor: 'white',
+    backgroundColor: purple,
     marginTop: 12
   }
 })
