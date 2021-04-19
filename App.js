@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import NewDeck from './components/NewDeck'
 import DecksList from './components/DecksList'
 import Deck from './components/Deck'
+import NewCard from './components/NewCard'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -18,6 +19,7 @@ const MainStackNavigation = () => {
     <Stack.Navigator>
       <Stack.Screen name="Decks" component={DecksList} />
       <Stack.Screen name="Deck" component={Deck} />
+      <Stack.Screen name="NewCard" component={NewCard} />
     </Stack.Navigator>
   )
 }
