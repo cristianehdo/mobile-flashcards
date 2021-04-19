@@ -24,14 +24,16 @@ const decks = (state = {}, action) => {
     delete decksObj[action.deckId]
     return decksObj
   }
-  case ADD_CARD :
+  case ADD_CARD : {
+    const deck = state[action.card.deckId]
     return {
       ...state,
-      [action.deckId]: {
-        ...action.decks[action.deckId],
-        ...action.deck.cards.concat([action.card])
+      [action.card.deckId]: {
+        ...deck,
+        cards: deck.cards.concat([action.card])
       },
     }
+  }
   default :
     return state
   }
