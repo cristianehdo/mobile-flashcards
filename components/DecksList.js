@@ -10,8 +10,6 @@ class DecksList extends Component {
   )
   render () {
     const { decks } = this.props
-
-    console.log(decks, 'decks')
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
