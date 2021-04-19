@@ -1,8 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { StyleSheet, Text, View, Button } from 'react-native'
 import PropTypes from 'prop-types'
 import { removeDeck} from '../actions'
-import { StyleSheet, Text, View, Button, TextButton } from 'react-native'
+import TextButton from './TextButton'
+import { white, purple, orange } from '../utils/colors'
 
 const Deck = ({ route }) => {
   const dispatch = useDispatch()
@@ -10,18 +12,26 @@ const Deck = ({ route }) => {
   const { title, cards, id } = deck
   return(
     <View style={styles.container} key={id}>
-      <Text style={styles.text}>{title}</Text>
-      <Text style={styles.text}>{cards.length} cards</Text>
-      <Button
-        title="Add card"
-        onPress={() => console.log('go to add card')}
-      />
-      <Button
-        title="Start quiz"
-        disabled={cards.length === 0}
-        onPress={() => console.log('start quiz')}
-      />
-      <TextButton style={{padding: 10}} onPress={dispatch(removeDeck(deck.id))}>
+      <View>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.text}>{cards.length} cards</Text>
+      </View>
+      <View>
+        <View style={styles.addBtnContainer}>
+          <Button
+            title="Add card"
+            onPress={() => console.log('go to add card')}
+          />
+        </View>
+        <View style={styles.quizBtnContainer}>
+          <Button
+            title="Start quiz"
+            disabled={cards.length === 0}
+            onPress={() => console.log('start quiz')}
+          />
+        </View>
+      </View>
+      <TextButton style={{fontSize: 16}} onPress={dispatch(removeDeck(id))}>
         Remove Deck
       </TextButton>
     </View>
@@ -30,12 +40,29 @@ const Deck = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 80,
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   text: {
-    fontSize: 16
+    fontSize: 16,
   },
+  title: {
+    fontSize: 24,
+  },
+  addBtnContainer: {
+    backgroundColor: purple,
+    marginTop: 12,
+    color: white,
+    borderRadius: 8
+  },
+  quizBtnContainer: {
+    backgroundColor: orange,
+    marginTop: 12,
+    color: white,
+    borderRadius: 8
+  }
 })
 
 Deck.propTypes = {
