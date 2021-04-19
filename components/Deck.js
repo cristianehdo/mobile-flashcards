@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import PropTypes from 'prop-types'
+import { useNavigation } from '@react-navigation/native'
 import { removeDeck} from '../actions'
 import TextButton from './TextButton'
 import { white, purple, orange } from '../utils/colors'
@@ -10,6 +11,11 @@ const Deck = ({ route }) => {
   const dispatch = useDispatch()
   const { deck } = route.params
   const { title, cards, id } = deck
+  const navigation = useNavigation()
+  const handleRemoveDeck = () => {
+    dispatch(removeDeck(id))
+    navigation.navigate( 'Decks')
+  }
   return(
     <View style={styles.container} key={id}>
       <View>
@@ -31,7 +37,7 @@ const Deck = ({ route }) => {
           />
         </View>
       </View>
-      <TextButton style={{fontSize: 16}} onPress={dispatch(removeDeck(id))}>
+      <TextButton style={{fontSize: 16}} onPress={handleRemoveDeck}>
         Remove Deck
       </TextButton>
     </View>
