@@ -1,14 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 const DecksListItem = ({ deck }) => {
   const { id, title, cards } = deck
+  const navigation = useNavigation()
   return (
     <View style={styles.container} key={id}>
       <Pressable
         onPress={() => {
-          // go to deck page
+          navigation.navigate(
+            'Deck',
+            { deck: deck }
+          )
         }}
         style={({ pressed }) => [
           {
