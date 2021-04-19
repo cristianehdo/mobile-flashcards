@@ -26,7 +26,7 @@ const Deck = ({ route }) => {
         <View style={styles.addBtnContainer}>
           <Button
             title="Add card"
-            onPress={() => console.log('go to add card')}
+            onPress={() => navigation.push('NewCard', {deckId: id})}
           />
         </View>
         <View style={styles.quizBtnContainer}>
