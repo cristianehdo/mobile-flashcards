@@ -2,6 +2,7 @@ import React from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
+import middleware from './middleware'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -22,7 +23,7 @@ const MainStackNavigation = () => {
 }
 export default function App() {
   return (
-    <Provider store={createStore(reducer)}>
+    <Provider store={createStore(reducer, middleware)}>
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Decks" component={MainStackNavigation} />
