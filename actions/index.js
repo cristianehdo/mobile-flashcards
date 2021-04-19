@@ -24,10 +24,9 @@ export const removeDeck = (deckId) => {
   }
 }
 
-export const addCard = (deckId, card) => {
+export const addCard = (card) => {
   return {
     type: ADD_CARD,
-    deckId,
     card,
   }
 }
