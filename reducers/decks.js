@@ -21,7 +21,7 @@ const decks = (state = {}, action) => {
     }
   case REMOVE_DECK: {
     const decksObj = { ...state }
-    delete decksObj[action.id]
+    delete decksObj[action.deckId]
     return decksObj
   }
   case ADD_CARD :
