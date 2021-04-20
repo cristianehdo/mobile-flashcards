@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import { removeDeck} from '../actions'
 import TextButton from './TextButton'
 import { white, purple, orange } from '../utils/colors'
+import { deleteDeck } from '../utils/api'
 
 const Deck = ({ route }) => {
   const dispatch = useDispatch()
@@ -14,6 +15,7 @@ const Deck = ({ route }) => {
   const navigation = useNavigation()
   const handleRemoveDeck = () => {
     dispatch(removeDeck(id))
+    deleteDeck(id)
     navigation.navigate( 'Decks')
   }
   return(
