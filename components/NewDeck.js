@@ -14,6 +14,7 @@ import {
 import { addDeck } from '../actions'
 import { generateId } from '../utils/helpers'
 import { black, purple } from '../utils/colors'
+import { persistDeck } from '../utils/api'
 
 
 const NewDeck = () => {
@@ -21,7 +22,10 @@ const NewDeck = () => {
   const dispatch = useDispatch()
   const handleAddDeck = (e) => {
     e.preventDefault()
-    dispatch(addDeck({ title: title, id: generateId() }))
+    const key = generateId()
+    const deck = { title: title, id: key, cards: [] }
+    dispatch(addDeck(deck))
+    persistDeck({key, deck})
     setTitle('')
   }
   return (
