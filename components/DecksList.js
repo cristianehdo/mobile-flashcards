@@ -3,8 +3,15 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { FlatList, StyleSheet, StatusBar, SafeAreaView } from 'react-native'
 import DecksListItem from './DecksListItem'
+import { getAll, deleteDeck } from '../utils/api'
+import { receiveDecks } from '../actions'
 
 class DecksList extends Component {
+  componentDidMount () {
+    getAll().then((storageDecks) => {
+      this.props.dispatch(receiveDecks(storageDecks))
+    })
+  }
   renderItem = ({ item }) => (
     <DecksListItem deck={item}/>
   )
@@ -29,7 +36,8 @@ const styles = StyleSheet.create({
   },
 })
 DecksList.propTypes = {
-  decks: PropTypes.array
+  decks: PropTypes.array,
+  dispatch: PropTypes.func,
 }
 
 const mapStateToProps = ({ decks }) => {
