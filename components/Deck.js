@@ -30,11 +30,13 @@ class Deck extends Component {
         <View style={styles.addBtnContainer}>
           <Button
             title="Add card"
+            color={Platform.OS === 'ios' ? white : purple}
             onPress={() => this.props.navigation.push('NewCard', {deckId: id})}
           />
         </View>
         <View style={styles.quizBtnContainer}>
           <Button
+            color={Platform.OS === 'ios' ? white : orange}
             title="Start quiz"
             onPress={() => this.props.navigation.push('Quiz', {deckId: id})}
           />

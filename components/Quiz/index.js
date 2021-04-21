@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, Platform} from 'react-native'
 import { white, purple, orange } from '../../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../../utils/helpers'
 import TextButton from '../TextButton'
@@ -71,20 +71,40 @@ class Quiz extends Component {
             {showQuestion ? 'Answer' : 'Question'}
           </TextButton>
         </View>
-        <View>
-          <View style={styles.correctBtnContainer}>
-            <Button
-              title="Correct"
-              onPress={() => this.handleAnswerQuestion(card.id, 'corrects')}
-            />
-          </View>
-          <View style={styles.incorrectBtnContainer}>
-            <Button
-              title="Incorrect"
-              onPress={() => this.handleAnswerQuestion(card.id, 'incorrects')}
-            />
-          </View>
-        </View>
+        {Platform.OS === 'ios'
+        ? (<View>
+            <View style={styles.correctBtnContainer}>
+              <Button
+                title="Correct"
+                color={white}
+                onPress={() => this.handleAnswerQuestion(card.id, 'corrects')}
+              />
+              </View>
+              <View style={styles.incorrectBtnContainer}>
+                <Button
+                  color={white}
+                  title="Incorrect"
+                  onPress={() => this.handleAnswerQuestion(card.id, 'incorrects')}
+                />
+              </View>
+            </View>)
+        :( <View>
+            <View style={styles.btnContainer}>
+              <Button
+                color={purple}
+                title="Correct"
+                onPress={() => this.handleAnswerQuestion(card.id, 'corrects')}
+              />
+            </View>
+            <View style={styles.btnContainer}>
+              <Button
+                color={orange}
+                title="Incorrect"
+                onPress={() => this.handleAnswerQuestion(card.id, 'incorrects')}
+              />
+            </View>
+        </View>)
+        }
       </View>
     )
   }
@@ -117,7 +137,10 @@ const styles = StyleSheet.create({
     paddingRight: 50,
     color: white,
     borderRadius: 8
-  }
+  },
+  btnContainer: {
+    marginTop: 20
+  },
 })
 const mapStateToProps = ({ decks }, { route, navigation }) => {
   const { deckId } = route.params
