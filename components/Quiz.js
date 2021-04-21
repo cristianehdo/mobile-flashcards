@@ -80,13 +80,16 @@ const styles = StyleSheet.create({
   },
   correctBtnContainer: {
     backgroundColor: purple,
-    marginTop: 12,
+    paddingLeft: 50,
+    paddingRight: 50,
     color: white,
     borderRadius: 8
   },
   incorrectBtnContainer: {
     backgroundColor: orange,
     marginTop: 12,
+    paddingLeft: 50,
+    paddingRight: 50,
     color: white,
     borderRadius: 8
   }
