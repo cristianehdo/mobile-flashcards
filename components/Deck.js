@@ -34,7 +34,6 @@ const Deck = ({ route }) => {
         <View style={styles.quizBtnContainer}>
           <Button
             title="Start quiz"
-            disabled={cards ? cards.length === 0 : false}
             onPress={() => navigation.push('Quiz', {deckId: id})}
           />
         </View>
