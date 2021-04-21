@@ -1,12 +1,16 @@
 import { AsyncStorage } from 'react-native'
 
 const NOTIFICATION_KEY = 'NOTIFICATION'
+const DECKS_KEY = 'decks'
 
 export const persistDeck = async ({ deck, key }) => {
+  const item = await AsyncStorage.getItem(DECKS_KEY)
   try {
-    await AsyncStorage.setItem(key, JSON.stringify({
-      [key]: deck
-    }))
+    if (item) {
+      await AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify({ [key]: deck }))
+    } else {
+      await AsyncStorage.setItem(DECKS_KEY, JSON.stringify({ [key]: deck }))
+    }
   } catch (e) {
     console.log(e, 'error on setItem')
   }
@@ -20,18 +24,9 @@ export const deleteDeck = async (key) => {
   }
 }
 
-const getAllKeys = async () => {
-  return await AsyncStorage.getAllKeys()
-}
-
 export const getAll = async () => {
-  const keys = await getAllKeys()
-  const storagedDecks = await AsyncStorage.multiGet(keys)
-  const decks = {}
-  storagedDecks.map((deck) => {
-    Object.assign(decks, JSON.parse(deck[1]))
-  })
-  return decks
+  const storagedDecks = await AsyncStorage.getItem(DECKS_KEY)
+  return JSON.parse(storagedDecks)
 }
 
 export const updateCards = async ({key, card}) => {
