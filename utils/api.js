@@ -17,8 +17,12 @@ export const persistDeck = async ({ deck, key }) => {
 }
 
 export const deleteDeck = async (key) => {
+  const storageDecks = await AsyncStorage.getItem(DECKS_KEY)
+  const decks = JSON.parse(storageDecks)
+  const decksObj = { ...decks }
+  delete decksObj[key]
   try {
-    await AsyncStorage.removeItem(key)
+    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decksObj))
   } catch (e) {
     console.log(e, 'error on removeItem')
   }
