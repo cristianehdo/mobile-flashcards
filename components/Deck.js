@@ -1,25 +1,26 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import PropTypes from 'prop-types'
-import { useNavigation } from '@react-navigation/native'
 import { removeDeck} from '../actions'
 import TextButton from './TextButton'
 import { white, purple, orange } from '../utils/colors'
 import { deleteDeck } from '../utils/api'
 
-const Deck = ({ route }) => {
-  const dispatch = useDispatch()
-  const { deckId } = route.params
-  const deck  = useSelector(state => state.decks[deckId])
-  const { title, cards, id } = deck
-  const navigation = useNavigation()
-  const handleRemoveDeck = () => {
-    dispatch(removeDeck(id))
-    deleteDeck(id)
-    navigation.navigate( 'Decks')
+class Deck extends Component {
+  handleRemoveDeck = () => {
+    const { deck } = this.props
+    this.props.dispatch(removeDeck(deck.id))
+    deleteDeck(deck.id)
+    this.props.navigation.goBack()
   }
-  return(
+  shouldComponentUpdate (nextProps) {
+    return nextProps.deck
+  }
+  render () {
+    const { deck } = this.props
+    const { title, cards, id } = deck
+    return(
     <View style={styles.container} key={id}>
       <View>
         <Text style={styles.title}>{title}</Text>
@@ -39,11 +40,12 @@ const Deck = ({ route }) => {
           />
         </View>
       </View>
-      <TextButton style={{fontSize: 16}} onPress={handleRemoveDeck}>
+      <TextButton style={{fontSize: 16}} onPress={this.handleRemoveDeck}>
         Remove Deck
       </TextButton>
-    </View>
-  )
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -76,4 +78,10 @@ const styles = StyleSheet.create({
 Deck.propTypes = {
   route: PropTypes.object,
 }
-export default Deck
+const mapStateToProps = ({ decks }, { route }) => {
+  const { deckId } = route.params
+  return {
+    deck: decks[deckId] || null
+  }
+}
+export default connect(mapStateToProps)(Deck)
