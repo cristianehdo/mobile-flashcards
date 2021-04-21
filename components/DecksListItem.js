@@ -26,7 +26,7 @@ const DecksListItem = ({ deck }) => {
         ]}>
         <View style={styles.text}>
           <Text >{title}</Text>
-          <Text >{cards.length} cards</Text>
+          <Text >{cards ? cards.length : 0} cards</Text>
         </View>
       </Pressable>
     </View>
