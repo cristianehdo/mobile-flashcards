@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { gray, purple } from '../utils/colors'
+import { white, grey } from '../utils/colors'
 
 const DecksListItem = ({ deck }) => {
   const { id, title, cards } = deck
@@ -19,8 +19,8 @@ const DecksListItem = ({ deck }) => {
         style={({ pressed }) => [
           {
             backgroundColor: pressed
-              ? purple
-              : gray
+              ? grey
+              : white
           },
           styles.wrapperCustom
         ]}>
@@ -43,7 +43,9 @@ const styles = StyleSheet.create({
   },
   wrapperCustom: {
     borderRadius: 8,
-    padding: 6
+    borderColor: grey,
+    borderWidth: 1,
+    padding: 30,
   },
 })
 
