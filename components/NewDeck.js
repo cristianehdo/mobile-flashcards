@@ -11,15 +11,16 @@ import {
   Button,
   Keyboard
 } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { addDeck } from '../actions'
 import { generateId } from '../utils/helpers'
 import { black, purple, orange } from '../utils/colors'
 import { persistDeck } from '../utils/api'
 
-
 const NewDeck = () => {
   const [title, setTitle] = useState(null)
   const [error, setError] = useState(false)
+  const navigation = useNavigation()
   const dispatch = useDispatch()
   const handleAddDeck = (e) => {
     e.preventDefault()
@@ -28,6 +29,10 @@ const NewDeck = () => {
     dispatch(addDeck(deck))
     persistDeck({key, deck})
     setTitle('')
+    navigation.navigate(
+      'Deck',
+      { deckId: key }
+    )
   }
   const existingTitle  = useSelector(state => {
     return Object.keys(state.decks).find((id) => state.decks[id].title === title)
