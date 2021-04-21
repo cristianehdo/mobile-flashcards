@@ -22,7 +22,7 @@ const Deck = ({ route }) => {
     <View style={styles.container} key={id}>
       <View>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.text}>{cards.length} cards</Text>
+        <Text style={styles.text}>{cards ? cards.length : 0} cards</Text>
       </View>
       <View>
         <View style={styles.addBtnContainer}>
@@ -34,7 +34,7 @@ const Deck = ({ route }) => {
         <View style={styles.quizBtnContainer}>
           <Button
             title="Start quiz"
-            disabled={cards.length === 0}
+            disabled={cards ? cards.length === 0 : false}
             onPress={() => console.log('start quiz')}
           />
         </View>
