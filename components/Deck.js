@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import PropTypes from 'prop-types'
 import { useNavigation } from '@react-navigation/native'
@@ -10,7 +10,8 @@ import { deleteDeck } from '../utils/api'
 
 const Deck = ({ route }) => {
   const dispatch = useDispatch()
-  const { deck } = route.params
+  const { deckId } = route.params
+  const deck  = useSelector(state => state.decks[deckId])
   const { title, cards, id } = deck
   const navigation = useNavigation()
   const handleRemoveDeck = () => {

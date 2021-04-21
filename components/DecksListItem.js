@@ -13,7 +13,7 @@ const DecksListItem = ({ deck }) => {
         onPress={() => {
           navigation.navigate(
             'Deck',
-            { deck: deck }
+            { deckId: id }
           )
         }}
         style={({ pressed }) => [
