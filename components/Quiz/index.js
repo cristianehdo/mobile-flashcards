@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, Button } from 'react-native'
-import { white, purple, orange } from '../utils/colors'
-import TextButton from './TextButton'
+import { white, purple, orange } from '../../utils/colors'
+import TextButton from '../TextButton'
+import NoCards from './NoCards'
+import Result from './Result'
 
 class Quiz extends Component {
   state = {
@@ -40,6 +42,15 @@ class Quiz extends Component {
       return <NoCards styles={styles} />
     }
     const card = this.fetchCard()
+    if (typeof card == 'undefined') {
+      return (
+        <Result
+          score={corrects}
+          total={corrects + incorrects}
+          styles={styles}
+          onPress={this.resetQuiz} />
+      )
+    }
     return (
       <View style={styles.container} >
         <Text style={styles.text}>{corrects + incorrects}/{cards.length}</Text>
