@@ -5,7 +5,9 @@ import { View, Text } from 'react-native'
 const NoCards = ({styles}) => {
   return(
     <View style={styles.container} >
-      <Text style={styles.text}>Sorry you cannot take a quiz because there are no cards in the deck</Text>
+      <Text style={styles.text}>
+        Sorry you cannot take a quiz because there are no cards in the deck
+      </Text>
     </View>
   )
 }
