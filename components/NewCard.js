@@ -73,14 +73,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   textInput: {
-    height: 40,
+    height: 15,
     borderColor: black,
     borderBottomWidth: 1,
-    marginBottom: 36
+    marginBottom: 10
   },
   btnContainer: {
     backgroundColor: purple,
-    marginTop: 12
   }
 })
 
