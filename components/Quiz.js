@@ -20,7 +20,7 @@ class Quiz extends Component {
   }
   handleAnswerQuestion = (id, answer) => {
     this.setState((state) => {
-      const cardsToAnswer = this.state.cardsToAnswer.filter((card) => card.id === id)
+      const cardsToAnswer = this.state.cardsToAnswer.filter((card) => card.id !== id)
       return {
         cardsToAnswer,
         [answer]: state[answer] + 1
