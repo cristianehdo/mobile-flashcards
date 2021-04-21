@@ -30,10 +30,16 @@ export const getAll = async () => {
 }
 
 export const updateCards = async ({key, card}) => {
-  const item = await AsyncStorage.getItem(key)
-  const deck = Object.assign(JSON.parse(item))
-  deck[key].cards = deck[key].cards.concat([card])
-  AsyncStorage.setItem(key, JSON.stringify(deck))
+  const storageDecks = await AsyncStorage.getItem(DECKS_KEY)
+  const decks = JSON.parse(storageDecks)
+  const deck = decks[key]
+  AsyncStorage.setItem(DECKS_KEY, JSON.stringify({
+    ...decks,
+    [key]: {
+      ...deck,
+      cards: deck.cards.concat([card])
+    }
+  }))
 }
 
 export const getNotification = async () => {
