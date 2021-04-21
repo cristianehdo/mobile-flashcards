@@ -1,10 +1,20 @@
 {
   "name": "mobile-flashcards",
-  "displayName": "mobile-flashcards",
+  "displayName": "Flashcards",
   "expo": {
     "name": "mobile-flashcards",
     "slug": "mobile-flashcards",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "description": "Flashcards for study",
+    "version": "1.0",
+    "icon": "https://res.cloudinary.com/dlyxj5ddk/image/upload/v1619038160/flashcards_aeb9zy.jpg",
+    "ios": {
+      "bundleIdentifier": "org.mobile-flashcards.exp"
+    },
+    "android": {
+      "package": "org.mobile-flashcards.exp"
+    },
     "assetBundlePatterns": [
       "**/*"
     ]
