@@ -30,13 +30,13 @@ class Deck extends Component {
         <View style={styles.addBtnContainer}>
           <Button
             title="Add card"
-            onPress={() => navigation.push('NewCard', {deckId: id})}
+            onPress={() => this.props.navigation.push('NewCard', {deckId: id})}
           />
         </View>
         <View style={styles.quizBtnContainer}>
           <Button
             title="Start quiz"
-            onPress={() => navigation.push('Quiz', {deckId: id})}
+            onPress={() => this.props.navigation.push('Quiz', {deckId: id})}
           />
         </View>
       </View>
