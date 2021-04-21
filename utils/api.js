@@ -1,5 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
+const NOTIFICATION_KEY = 'NOTIFICATION'
+
 export const persistDeck = async ({ deck, key }) => {
   try {
     await AsyncStorage.setItem(key, JSON.stringify({
@@ -37,4 +39,20 @@ export const updateCards = async ({key, card}) => {
   const deck = Object.assign(JSON.parse(item))
   deck[key].cards = deck[key].cards.concat([card])
   AsyncStorage.setItem(key, JSON.stringify(deck))
+}
+
+export const getNotification = async () => {
+  try {
+    await AsyncStorage.getItem(NOTIFICATION_KEY)
+  } catch (e) {
+    console.log(e, 'error gettting notification')
+  }
+}
+
+export const setNotification = async (notification) => {
+  try {
+    await AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(notification))
+  } catch (e) {
+    console.log(e, 'error on setting notification')
+  }
 }
