@@ -36,6 +36,14 @@ class Quiz extends Component {
     const index = Math.floor(Math.random() * this.state.cardsToAnswer.length)
     return this.state.cardsToAnswer[index]
   }
+  resetQuiz = () => {
+    this.setState({
+      cardsToAnswer: this.props.deck.cards,
+      corrects: 0,
+      incorrects: 0,
+      showQuestion : true,
+    })
+  }
   render () {
     const { cards, corrects, incorrects, showQuestion } = this.state
     if (cards.length === 0) {
@@ -73,8 +81,6 @@ class Quiz extends Component {
               onPress={() => this.handleAnswerQuestion(card.id, 'incorrects')}
             />
           </View>
-          <Text style={styles.text}>corrects: {corrects}</Text>
-          <Text style={styles.text}>incorrects: {incorrects}</Text>
         </View>
       </View>
     )
