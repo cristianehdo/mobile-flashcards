@@ -56,3 +56,11 @@ export const setNotification = async (notification) => {
     console.log(e, 'error on setting notification')
   }
 }
+
+export const removeNotification = async () => {
+  try {
+    await AsyncStorage.removeItem(NOTIFICATION_KEY)
+  } catch (e) {
+    console.log(e, 'error removing notification')
+  }
+}
