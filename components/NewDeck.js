@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   View,
   KeyboardAvoidingView,
@@ -13,12 +13,13 @@ import {
 } from 'react-native'
 import { addDeck } from '../actions'
 import { generateId } from '../utils/helpers'
-import { black, purple } from '../utils/colors'
+import { black, purple, orange } from '../utils/colors'
 import { persistDeck } from '../utils/api'
 
 
 const NewDeck = () => {
   const [title, setTitle] = useState(null)
+  const [error, setError] = useState(false)
   const dispatch = useDispatch()
   const handleAddDeck = (e) => {
     e.preventDefault()
@@ -28,6 +29,12 @@ const NewDeck = () => {
     persistDeck({key, deck})
     setTitle('')
   }
+  const existingTitle  = useSelector(state => {
+    return Object.keys(state.decks).find((id) => state.decks[id].title === title)
+  })
+  useEffect(()=> {
+    setError(!!existingTitle)
+  }, [title, existingTitle])
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -36,15 +43,18 @@ const NewDeck = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
           <Text style={styles.header}>What is the title of your new Deck?</Text>
-          <TextInput
-            value={title}
-            placeholder="Title"
-            onChangeText={setTitle}
-            style={styles.textInput} />
+          <View>
+            <TextInput
+              value={title}
+              placeholder="Title"
+              onChangeText={setTitle}
+              style={styles.textInput} />
+            {error? <Text style={styles.helper}>Title already exists</Text> : null}
+          </View>
           <View style={styles.btnContainer}>
             <Button
               title="Add Deck"
-              disabled={!title}
+              disabled={!title || error}
               onPress={handleAddDeck} />
           </View>
         </View>
@@ -75,6 +85,10 @@ const styles = StyleSheet.create({
   btnContainer: {
     backgroundColor: purple,
     marginTop: 12
+  },
+  helper: {
+    fontSize: 12,
+    color: orange
   }
 })
 
