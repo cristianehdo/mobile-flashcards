@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import { white, purple, orange } from '../../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../../utils/helpers'
 import TextButton from '../TextButton'
 import NoCards from './NoCards'
 import Result from './Result'
@@ -51,6 +52,8 @@ class Quiz extends Component {
     }
     const card = this.fetchCard()
     if (typeof card == 'undefined') {
+      clearLocalNotification()
+        .then(setLocalNotification)
       return (
         <Result
           score={corrects}

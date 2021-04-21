@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import middleware from './middleware'
+import { setLocalNotification } from './utils/helpers'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -25,17 +26,22 @@ const MainStackNavigation = () => {
     </Stack.Navigator>
   )
 }
-export default function App() {
-  return (
-    <Provider store={createStore(reducer, middleware)}>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Decks" component={MainStackNavigation} />
-          <Tab.Screen name="Add" component={NewDeck} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </Provider>
-  )
+class App extends Component{
+  componentDidMount() {
+    setLocalNotification()
+  }
+  render() {
+    return (
+      <Provider store={createStore(reducer, middleware)}>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Decks" component={MainStackNavigation} />
+            <Tab.Screen name="Add" component={NewDeck} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </Provider>
+    )
+  }
 }
 
-
+export default App
