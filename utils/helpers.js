@@ -17,7 +17,7 @@ const notification = {
     sticky: false,
   },
 }
-export function setLocalNotification() {
+export const setLocalNotification = () => {
   getNotification()
     .then(JSON.parse)
     .then((data) => {
