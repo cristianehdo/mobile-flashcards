@@ -10,6 +10,7 @@ import NewDeck from './components/NewDeck'
 import DecksList from './components/DecksList'
 import Deck from './components/Deck'
 import NewCard from './components/NewCard'
+import Quiz from './components/Quiz'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -20,6 +21,7 @@ const MainStackNavigation = () => {
       <Stack.Screen name="Decks" component={DecksList} />
       <Stack.Screen name="Deck" component={Deck} />
       <Stack.Screen name="NewCard" component={NewCard} />
+      <Stack.Screen name="Quiz" component={Quiz} />
     </Stack.Navigator>
   )
 }
