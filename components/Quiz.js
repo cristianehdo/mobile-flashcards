@@ -29,8 +29,7 @@ class Quiz extends Component {
   }
   fetchCard = () => {
     const index = Math.floor(Math.random() * this.state.cardsToAnswer.length)
-    const card = this.state.cardsToAnswer[index]
-    return card
+    return this.state.cardsToAnswer[index]
   }
   render () {
     const card = this.fetchCard()
