@@ -31,3 +31,10 @@ export const getAll = async () => {
   })
   return decks
 }
+
+export const updateCards = async ({key, card}) => {
+  const item = await AsyncStorage.getItem(key)
+  const deck = Object.assign(JSON.parse(item))
+  deck[key].cards = deck[key].cards.concat([card])
+  AsyncStorage.setItem(key, JSON.stringify(deck))
+}

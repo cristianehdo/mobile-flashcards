@@ -14,6 +14,7 @@ import {
 import { addCard } from '../actions'
 import { generateId } from '../utils/helpers'
 import { black, purple } from '../utils/colors'
+import { updateCards } from '../utils/api'
 
 const NewCard = ({ route }) => {
   const { deckId } = route.params
@@ -22,14 +23,16 @@ const NewCard = ({ route }) => {
   const dispatch = useDispatch()
   const handleAddCard = (e) => {
     e.preventDefault()
-    dispatch(addCard({
+    const card = {
       question: question,
       answer: answer,
       deckId: deckId,
       id: generateId()
-    }))
+    }
+    dispatch(addCard(card))
     setQuestion('')
     setAnswer('')
+    updateCards({key: deckId, card})
   }
   return (
     <KeyboardAvoidingView
