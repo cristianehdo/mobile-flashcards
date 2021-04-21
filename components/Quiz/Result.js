@@ -15,7 +15,7 @@ const Result = ({score, total, onPress}) => {
         </Text>
       </View>
       <TextButton style={styles.button} onPress={onPress}>
-        Reset Quiz
+        Restart Quiz
       </TextButton>
     </View>
   )
