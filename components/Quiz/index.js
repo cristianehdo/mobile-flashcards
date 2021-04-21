@@ -28,17 +28,16 @@ class Quiz extends Component {
     })
   }
   fetchCard = () => {
+    if (this.state.cardsToAnswer.length === []) {
+      return undefined
+    }
     const index = Math.floor(Math.random() * this.state.cardsToAnswer.length)
     return this.state.cardsToAnswer[index]
   }
   render () {
     const { cards, corrects, incorrects, showQuestion } = this.state
     if (cards.length === 0) {
-      return(
-        <View style={styles.container} >
-          <Text style={styles.text}>Sorry you cannot take a quiz because there are no cards in the deck</Text>
-        </View>
-      )
+      return <NoCards styles={styles} />
     }
     const card = this.fetchCard()
     return (
